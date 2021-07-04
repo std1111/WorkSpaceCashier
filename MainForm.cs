@@ -14,7 +14,7 @@ namespace WorkSpaceCashier
 {
     public partial class MainForm : Form
     {
-        private string pathToIniFile;
+        private static string pathToIniFile;
         private INIManager iniManager;
 
 
@@ -42,16 +42,17 @@ namespace WorkSpaceCashier
 
         private void btnSigninCashier_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", @"/C python.exe C:/Users/Home/PycharmProjects/UUID/SigninCashier.py > H:\RRO_Exchange\log.log");//+ textBoxInputCommand.Text
-            procStartInfo.WorkingDirectory = @"c:\";
-            procStartInfo.RedirectStandardOutput = true;
-            //procStartInfo.UseShellExecute = true;
-            procStartInfo.UseShellExecute = false;
-            Process proc = new Process();
-            proc.StartInfo = procStartInfo;
-            proc.Start();
-            string result = proc.StandardOutput.ReadToEnd();
-            richTextBoxCommandOutput.Text += result;
+            SigningCashier.Post_SignIn_Cashier_CheckBoxAPI().Wait(); 
+            //ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", @"/C python.exe C:/Users/Home/PycharmProjects/UUID/SigninCashier.py > H:\RRO_Exchange\log.log");//+ textBoxInputCommand.Text
+            //procStartInfo.WorkingDirectory = @"c:\";
+            //procStartInfo.RedirectStandardOutput = true;
+            ////procStartInfo.UseShellExecute = true;
+            //procStartInfo.UseShellExecute = false;
+            //Process proc = new Process();
+            //proc.StartInfo = procStartInfo;
+            //proc.Start();
+            //string result = proc.StandardOutput.ReadToEnd();
+            //richTextBoxCommandOutput.Text += result;
         }
 
         private void btnPathWorkFolder_Click(object sender, EventArgs e)
