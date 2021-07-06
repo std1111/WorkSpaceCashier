@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cashier.cs" />
+    <Compile Include="CashierResponse.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="INIManager.cs" />
     <Compile Include="ListStaticVar.cs" />

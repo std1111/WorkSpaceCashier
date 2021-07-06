@@ -20,8 +20,8 @@ namespace WorkSpaceCashier
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("X-License-Key", "3e13e8648592d23a8bdac4e5");
             Cashier cashier = new Cashier();
-            cashier.Login = "test2206";
-            cashier.Password = "123456";
+            cashier.login = "test2206";
+            cashier.password = "123456";
             string queryString = JsonConvert.SerializeObject(cashier);
             StringContent httpContent = new StringContent(queryString, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("/api/v1/cashier/signin", httpContent);

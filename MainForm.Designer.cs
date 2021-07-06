@@ -38,15 +38,17 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSigninCashier
             // 
             this.btnSigninCashier.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSigninCashier.Location = new System.Drawing.Point(120, 26);
+            this.btnSigninCashier.Location = new System.Drawing.Point(6, 6);
             this.btnSigninCashier.Name = "btnSigninCashier";
             this.btnSigninCashier.Size = new System.Drawing.Size(259, 37);
             this.btnSigninCashier.TabIndex = 0;
@@ -56,7 +58,7 @@
             // 
             // btnShifts
             // 
-            this.btnShifts.Location = new System.Drawing.Point(120, 69);
+            this.btnShifts.Location = new System.Drawing.Point(6, 49);
             this.btnShifts.Name = "btnShifts";
             this.btnShifts.Size = new System.Drawing.Size(259, 37);
             this.btnShifts.TabIndex = 1;
@@ -68,7 +70,7 @@
             // btnSell
             // 
             this.btnSell.BackColor = System.Drawing.SystemColors.Info;
-            this.btnSell.Location = new System.Drawing.Point(120, 112);
+            this.btnSell.Location = new System.Drawing.Point(6, 92);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(259, 92);
             this.btnSell.TabIndex = 2;
@@ -77,11 +79,12 @@
             // 
             // richTextBoxCommandOutput
             // 
-            this.richTextBoxCommandOutput.Location = new System.Drawing.Point(120, 210);
+            this.richTextBoxCommandOutput.Location = new System.Drawing.Point(271, 6);
             this.richTextBoxCommandOutput.Name = "richTextBoxCommandOutput";
-            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(259, 160);
+            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(391, 393);
             this.richTextBoxCommandOutput.TabIndex = 3;
             this.richTextBoxCommandOutput.Text = "";
+            this.richTextBoxCommandOutput.TextChanged += new System.EventHandler(this.richTextBoxCommandOutput_TextChanged);
             // 
             // btnPathWorkFolder
             // 
@@ -117,7 +120,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(575, 434);
+            this.tabControl1.Size = new System.Drawing.Size(676, 434);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
@@ -130,7 +133,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(567, 405);
+            this.tabPage1.Size = new System.Drawing.Size(668, 405);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Рабочее место";
             // 
@@ -148,12 +151,17 @@
             this.tabPage2.Text = "Настройки";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(598, 450);
+            this.ClientSize = new System.Drawing.Size(700, 450);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "Рабочее место РРО";
@@ -163,6 +171,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -179,6 +188,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 
