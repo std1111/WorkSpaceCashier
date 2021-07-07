@@ -38,7 +38,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.BtnCloseShift = new System.Windows.Forms.Button();
-            this.btnInfoShift = new System.Windows.Forms.Button();
+            this.BtnInfoShift = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tabControl1.SuspendLayout();
@@ -129,7 +129,7 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tabPage1.Controls.Add(this.BtnCloseShift);
-            this.tabPage1.Controls.Add(this.btnInfoShift);
+            this.tabPage1.Controls.Add(this.BtnInfoShift);
             this.tabPage1.Controls.Add(this.btnSigninCashier);
             this.tabPage1.Controls.Add(this.richTextBoxCommandOutput);
             this.tabPage1.Controls.Add(this.btnNewShift);
@@ -152,16 +152,16 @@
             this.BtnCloseShift.UseVisualStyleBackColor = true;
             this.BtnCloseShift.Click += new System.EventHandler(this.BtnCloseShift_Click);
             // 
-            // btnInfoShift
+            // BtnInfoShift
             // 
-            this.btnInfoShift.Location = new System.Drawing.Point(6, 92);
-            this.btnInfoShift.Name = "btnInfoShift";
-            this.btnInfoShift.Size = new System.Drawing.Size(259, 37);
-            this.btnInfoShift.TabIndex = 4;
-            this.btnInfoShift.Text = "Перевірка статусу зміни";
-            this.btnInfoShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.btnInfoShift.UseVisualStyleBackColor = true;
-            this.btnInfoShift.Click += new System.EventHandler(this.button1_Click);
+            this.BtnInfoShift.Location = new System.Drawing.Point(6, 92);
+            this.BtnInfoShift.Name = "BtnInfoShift";
+            this.BtnInfoShift.Size = new System.Drawing.Size(259, 37);
+            this.BtnInfoShift.TabIndex = 4;
+            this.BtnInfoShift.Text = "Перевірка статусу зміни";
+            this.BtnInfoShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.BtnInfoShift.UseVisualStyleBackColor = true;
+            this.BtnInfoShift.Click += new System.EventHandler(this.BtnInfoShift_Click);
             // 
             // tabPage2
             // 
@@ -216,7 +216,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Button BtnCloseShift;
-        private System.Windows.Forms.Button btnInfoShift;
+        private System.Windows.Forms.Button BtnInfoShift;
     }
 }
 

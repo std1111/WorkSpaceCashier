@@ -27,19 +27,22 @@ namespace WorkSpaceCashier
             tbPathToWorkFolder.Text = workingFolder;
         }
 
-
+        private void AddResultText(RichTextBox rtBox, List<string> addText)
+        {
+            rtBox.AppendText("-------" + DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss") + "-------\n");
+            foreach (var str in addText)
+            {
+                rtBox.AppendText(str);
+            }
+            richTextBoxCommandOutput.AppendText(ListStaticVar.Separator);
+        }
 
         private async void BtnSigninCashier_Click(object sender, EventArgs e)
         {
             Controller controller = new Controller();
             controller.WorkingFolder = tbPathToWorkFolder.Text;
             await controller.Post_SignIn_Cashier_CheckBoxAPI();
-            foreach (var str in controller.ResultText)
-            {
-                richTextBoxCommandOutput.AppendText(str);
-            }
-       
-      
+            AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
         private void BtnPathWorkFolder_Click(object sender, EventArgs e)
@@ -57,24 +60,23 @@ namespace WorkSpaceCashier
             Controller controller = new Controller();
             controller.WorkingFolder = tbPathToWorkFolder.Text;
             await controller.Post_OpenShift_CheckBoxAPI();
-            foreach (var str in controller.ResultText)
-            {
-                richTextBoxCommandOutput.AppendText(str);
-            }
-
-
+            AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
+        private async void BtnInfoShift_Click(object sender, EventArgs e)
+        {
+            Controller controller = new Controller();
+            controller.WorkingFolder = tbPathToWorkFolder.Text;
+            await controller.Get_InfoShift_CheckBoxAPI();
+            AddResultText(richTextBoxCommandOutput, controller.ResultText);
+        }
 
         private async void BtnCloseShift_Click(object sender, EventArgs e)
         {
             Controller controller = new Controller();
             controller.WorkingFolder = tbPathToWorkFolder.Text;
             await controller.Post_CloseShift_CheckBoxAPI();
-            foreach (var str in controller.ResultText)
-            {
-                richTextBoxCommandOutput.AppendText(str);
-            }
+            AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -112,11 +114,6 @@ namespace WorkSpaceCashier
         }
 
         private void richTextBoxCommandOutput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
         {
 
         }
