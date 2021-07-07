@@ -14,7 +14,7 @@ namespace WorkSpaceCashier
 {
     public partial class MainForm : Form
     {
-        private static string pathToIniFile = Application.StartupPath + "\\INI\\Settings.ini";
+        private static readonly string pathToIniFile = Application.StartupPath + "\\INI\\Settings.ini";
         private INIManager iniManager;
         private string workingFolder;
 
@@ -27,22 +27,9 @@ namespace WorkSpaceCashier
             tbPathToWorkFolder.Text = workingFolder;
         }
 
-        private void btnShifts_Click(object sender, EventArgs e)
-        {
-            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", @"/C python.exe C:/Users/Home/PycharmProjects/UUID/SigninCashier.py > H:\RRO_Exchange\log.log");//+ textBoxInputCommand.Text
-            procStartInfo.WorkingDirectory = @"c:\";
-            procStartInfo.RedirectStandardOutput = true;
-            //procStartInfo.UseShellExecute = true;
-            procStartInfo.UseShellExecute = false;
-            Process proc = new Process();
-            proc.StartInfo = procStartInfo;
-            proc.Start();
-            string result = proc.StandardOutput.ReadToEnd();
-            richTextBoxCommandOutput.Text += "dfdfd";
-        }
 
 
-        private async void btnSigninCashier_Click(object sender, EventArgs e)
+        private async void BtnSigninCashier_Click(object sender, EventArgs e)
         {
             Controller controller = new Controller();
             controller.WorkingFolder = tbPathToWorkFolder.Text;
@@ -55,13 +42,39 @@ namespace WorkSpaceCashier
       
         }
 
-        private void btnPathWorkFolder_Click(object sender, EventArgs e)
+        private void BtnPathWorkFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
 
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 tbPathToWorkFolder.Text = fbd.SelectedPath;
             workingFolder = fbd.SelectedPath;
+        }
+
+
+        private async void BtnNewShift_Click(object sender, EventArgs e)
+        {
+            Controller controller = new Controller();
+            controller.WorkingFolder = tbPathToWorkFolder.Text;
+            await controller.Post_OpenShift_CheckBoxAPI();
+            foreach (var str in controller.ResultText)
+            {
+                richTextBoxCommandOutput.AppendText(str);
+            }
+
+
+        }
+
+
+        private async void BtnCloseShift_Click(object sender, EventArgs e)
+        {
+            Controller controller = new Controller();
+            controller.WorkingFolder = tbPathToWorkFolder.Text;
+            await controller.Post_CloseShift_CheckBoxAPI();
+            foreach (var str in controller.ResultText)
+            {
+                richTextBoxCommandOutput.AppendText(str);
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -85,6 +98,9 @@ namespace WorkSpaceCashier
             
         }
 
+
+
+
         private void tbPathToWorkFolder_TextChanged(object sender, EventArgs e)
         {
 
@@ -99,5 +115,12 @@ namespace WorkSpaceCashier
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

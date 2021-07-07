@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnSigninCashier = new System.Windows.Forms.Button();
-            this.btnShifts = new System.Windows.Forms.Button();
+            this.btnNewShift = new System.Windows.Forms.Button();
             this.btnSell = new System.Windows.Forms.Button();
             this.richTextBoxCommandOutput = new System.Windows.Forms.RichTextBox();
             this.btnPathWorkFolder = new System.Windows.Forms.Button();
@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BtnCloseShift = new System.Windows.Forms.Button();
+            this.btnInfoShift = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tabControl1.SuspendLayout();
@@ -54,23 +56,23 @@
             this.btnSigninCashier.TabIndex = 0;
             this.btnSigninCashier.Text = "Вхід користувача(касира)";
             this.btnSigninCashier.UseVisualStyleBackColor = false;
-            this.btnSigninCashier.Click += new System.EventHandler(this.btnSigninCashier_Click);
+            this.btnSigninCashier.Click += new System.EventHandler(this.BtnSigninCashier_Click);
             // 
-            // btnShifts
+            // btnNewShift
             // 
-            this.btnShifts.Location = new System.Drawing.Point(6, 49);
-            this.btnShifts.Name = "btnShifts";
-            this.btnShifts.Size = new System.Drawing.Size(259, 37);
-            this.btnShifts.TabIndex = 1;
-            this.btnShifts.Text = " Відкриття нової зміни користувачем (касиром)";
-            this.btnShifts.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.btnShifts.UseVisualStyleBackColor = true;
-            this.btnShifts.Click += new System.EventHandler(this.btnShifts_Click);
+            this.btnNewShift.Location = new System.Drawing.Point(6, 49);
+            this.btnNewShift.Name = "btnNewShift";
+            this.btnNewShift.Size = new System.Drawing.Size(259, 37);
+            this.btnNewShift.TabIndex = 1;
+            this.btnNewShift.Text = " Відкриття нової зміни користувачем (касиром)";
+            this.btnNewShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnNewShift.UseVisualStyleBackColor = true;
+            this.btnNewShift.Click += new System.EventHandler(this.BtnNewShift_Click);
             // 
             // btnSell
             // 
             this.btnSell.BackColor = System.Drawing.SystemColors.Info;
-            this.btnSell.Location = new System.Drawing.Point(6, 92);
+            this.btnSell.Location = new System.Drawing.Point(335, 6);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(259, 92);
             this.btnSell.TabIndex = 2;
@@ -79,9 +81,9 @@
             // 
             // richTextBoxCommandOutput
             // 
-            this.richTextBoxCommandOutput.Location = new System.Drawing.Point(271, 6);
+            this.richTextBoxCommandOutput.Location = new System.Drawing.Point(6, 195);
             this.richTextBoxCommandOutput.Name = "richTextBoxCommandOutput";
-            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(391, 393);
+            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(656, 204);
             this.richTextBoxCommandOutput.TabIndex = 3;
             this.richTextBoxCommandOutput.Text = "";
             this.richTextBoxCommandOutput.TextChanged += new System.EventHandler(this.richTextBoxCommandOutput_TextChanged);
@@ -94,7 +96,7 @@
             this.btnPathWorkFolder.TabIndex = 4;
             this.btnPathWorkFolder.Text = "Выбрать";
             this.btnPathWorkFolder.UseVisualStyleBackColor = true;
-            this.btnPathWorkFolder.Click += new System.EventHandler(this.btnPathWorkFolder_Click);
+            this.btnPathWorkFolder.Click += new System.EventHandler(this.BtnPathWorkFolder_Click);
             // 
             // tbPathToWorkFolder
             // 
@@ -126,9 +128,11 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tabPage1.Controls.Add(this.BtnCloseShift);
+            this.tabPage1.Controls.Add(this.btnInfoShift);
             this.tabPage1.Controls.Add(this.btnSigninCashier);
             this.tabPage1.Controls.Add(this.richTextBoxCommandOutput);
-            this.tabPage1.Controls.Add(this.btnShifts);
+            this.tabPage1.Controls.Add(this.btnNewShift);
             this.tabPage1.Controls.Add(this.btnSell);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
@@ -136,6 +140,28 @@
             this.tabPage1.Size = new System.Drawing.Size(668, 405);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Рабочее место";
+            // 
+            // BtnCloseShift
+            // 
+            this.BtnCloseShift.Location = new System.Drawing.Point(6, 135);
+            this.BtnCloseShift.Name = "BtnCloseShift";
+            this.BtnCloseShift.Size = new System.Drawing.Size(259, 37);
+            this.BtnCloseShift.TabIndex = 5;
+            this.BtnCloseShift.Text = "Закриття зміни";
+            this.BtnCloseShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.BtnCloseShift.UseVisualStyleBackColor = true;
+            this.BtnCloseShift.Click += new System.EventHandler(this.BtnCloseShift_Click);
+            // 
+            // btnInfoShift
+            // 
+            this.btnInfoShift.Location = new System.Drawing.Point(6, 92);
+            this.btnInfoShift.Name = "btnInfoShift";
+            this.btnInfoShift.Size = new System.Drawing.Size(259, 37);
+            this.btnInfoShift.TabIndex = 4;
+            this.btnInfoShift.Text = "Перевірка статусу зміни";
+            this.btnInfoShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnInfoShift.UseVisualStyleBackColor = true;
+            this.btnInfoShift.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
             // 
@@ -146,7 +172,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(567, 405);
+            this.tabPage2.Size = new System.Drawing.Size(668, 405);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
@@ -179,7 +205,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnSigninCashier;
-        private System.Windows.Forms.Button btnShifts;
+        private System.Windows.Forms.Button btnNewShift;
         private System.Windows.Forms.Button btnSell;
         private System.Windows.Forms.RichTextBox richTextBoxCommandOutput;
         private System.Windows.Forms.Button btnPathWorkFolder;
@@ -189,6 +215,8 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Button BtnCloseShift;
+        private System.Windows.Forms.Button btnInfoShift;
     }
 }
 

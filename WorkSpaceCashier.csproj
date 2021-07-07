@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth.cs" />
     <Compile Include="Cashier.cs" />
     <Compile Include="CashierResponse.cs" />
     <Compile Include="Controller.cs" />
