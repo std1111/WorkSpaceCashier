@@ -23,6 +23,8 @@ namespace WorkSpaceCashier
         {
             InitializeComponent();
             iniManager = new INIManager(pathToIniFile);
+            workingFolder = iniManager.GetPrivateString("main", "PathToWorkFolder");
+            tbPathToWorkFolder.Text = workingFolder;
         }
 
         private void btnShifts_Click(object sender, EventArgs e)
@@ -43,7 +45,7 @@ namespace WorkSpaceCashier
         private async void btnSigninCashier_Click(object sender, EventArgs e)
         {
             Controller controller = new Controller();
-            controller.WorkingFolder = this.workingFolder;
+            controller.WorkingFolder = tbPathToWorkFolder.Text;
             await controller.Post_SignIn_Cashier_CheckBoxAPI();
             foreach (var str in controller.ResultText)
             {

@@ -24,20 +24,10 @@ namespace WorkSpaceCashier
             client.BaseAddress = new Uri(ListStaticVar.URI_BaseAddress);
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            //Cashier cashier = new Cashier();
-            //cashier.login = "test2206";
-            //cashier.password = "123456";
-            Cashier cashier = new Cashier();
-            using (StreamReader file = File.OpenText(Path.Combine(WorkingFolder, "cashier.json")));
 
-            using (JsonTextReader reader = new JsonTextReader(file)) ;
-            {
-                cashier = (Cashier)JToken.ReadFrom(reader);
-            }
+            var jsonString = File.ReadAllText(Path.Combine(WorkingFolder, "cashier.json"));
 
-
-            string queryString = JsonConvert.SerializeObject(cashier);
-            StringContent httpContent = new StringContent(queryString, System.Text.Encoding.UTF8, "application/json");
+            StringContent httpContent = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(ListStaticVar.URI_SigningCashier, httpContent);
 
             var result = await response.Content.ReadAsStringAsync();
@@ -46,9 +36,9 @@ namespace WorkSpaceCashier
             if (response.IsSuccessStatusCode)
             {
                 ResultText.Add(String.Format("Запрос выполнен успешно. Статус {0}\n", response.StatusCode));
-                ResultText.Add(String.Format("Тип {0}\n", Json_Array.type));
-                ResultText.Add(String.Format("Тип токена {0}\n", Json_Array.token_type));
-                ResultText.Add(String.Format("Токен доступа {0}\n", Json_Array.access_token));
+                ResultText.Add(String.Format("Тип: {0}\n", Json_Array.type));
+                ResultText.Add(String.Format("Тип токена: {0}\n", Json_Array.token_type));
+                ResultText.Add(String.Format("Токен доступа: {0}\n", Json_Array.access_token));
             }
             else
             {
