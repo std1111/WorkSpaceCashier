@@ -86,8 +86,6 @@
             this.richTextBoxCommandOutput.Size = new System.Drawing.Size(656, 204);
             this.richTextBoxCommandOutput.TabIndex = 3;
             this.richTextBoxCommandOutput.Text = "";
-            this.richTextBoxCommandOutput.TextChanged += new System.EventHandler(this.richTextBoxCommandOutput_TextChanged);
-            // 
             // btnPathWorkFolder
             // 
             this.btnPathWorkFolder.Location = new System.Drawing.Point(473, 14);
@@ -104,7 +102,6 @@
             this.tbPathToWorkFolder.Name = "tbPathToWorkFolder";
             this.tbPathToWorkFolder.Size = new System.Drawing.Size(333, 22);
             this.tbPathToWorkFolder.TabIndex = 5;
-            this.tbPathToWorkFolder.TextChanged += new System.EventHandler(this.tbPathToWorkFolder_TextChanged);
             // 
             // label1
             // 
@@ -175,7 +172,6 @@
             this.tabPage2.Size = new System.Drawing.Size(668, 405);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки";
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // fileSystemWatcher1
             // 

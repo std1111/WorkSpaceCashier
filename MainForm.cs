@@ -34,7 +34,7 @@ namespace WorkSpaceCashier
             {
                 rtBox.AppendText(str);
             }
-            richTextBoxCommandOutput.AppendText(ListStaticVar.Separator);
+            richTextBoxCommandOutput.AppendText("\n");
         }
 
         private async void BtnSigninCashier_Click(object sender, EventArgs e)
@@ -86,38 +86,8 @@ namespace WorkSpaceCashier
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {     
-            //if (File.Exists(pathToIniFile))
-            //    MessageBox.Show("Yes");
-            //else
-
-            //    MessageBox.Show(pathToIniFile);
-
-
-            //INIManager manager = new INIManager(pathToIniFile);
-            //MessageBox.Show(manager.GetPrivateString("main", "PathToWorkFolder"));
-
             iniManager.WritePrivateString("main", "PathToWorkFolder", tbPathToWorkFolder.Text);
-            
         }
-
-
-
-
-        private void tbPathToWorkFolder_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBoxCommandOutput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
     }
 }

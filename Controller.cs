@@ -119,7 +119,7 @@ namespace WorkSpaceCashier
             ResultText = new List<string>();
             if (response.IsSuccessStatusCode)
             {
-                ResultText.Add("Інфо по зміни\n");
+                ResultText.Add("Інфо по зміні\n");
                 ResultText.Add(String.Format("ID зміни: {0}\n", Json_Array.id));
                 ResultText.Add(String.Format("Статус зміни: {0}\n", Json_Array.status));
                 ResultText.Add(String.Format("Відкрита: {0}\n", Json_Array.opened_at));
@@ -130,7 +130,7 @@ namespace WorkSpaceCashier
             }
         else
         {
-            ResultText.Add(String.Format("{0}\n", Json_Array.message));
+            ResultText.Add(String.Format("{0}\n", "Помилка отримання інформації по зміні!"));
 
         }
         }
@@ -152,7 +152,7 @@ namespace WorkSpaceCashier
                     ResultText.Add(String.Format("Статус зміни: {0}\n", Json_Array.status));
 
                     string path = Path.Combine(WorkingFolder, "shift.json");
-                    File.WriteAllText(path, result_json);
+                    File.WriteAllText(path, result);
                 }
                 else
                 {
