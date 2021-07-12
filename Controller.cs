@@ -58,10 +58,11 @@ namespace WorkSpaceCashier
             ResultText = new List<string>(); 
             if (response.IsSuccessStatusCode)
             {
-                ResultText.Add(String.Format("Запрос выполнен успешно. Статус {0}\n", response.StatusCode));
-                ResultText.Add(String.Format("Тип: {0}\n", Json_Array.type));
-                ResultText.Add(String.Format("Тип токена: {0}\n", Json_Array.token_type));
-                ResultText.Add(String.Format("Токен доступа: {0}\n", Json_Array.access_token));
+               // File.WriteAllText(Path.Combine(WorkingFolder, "cashier_response.json"), JsonConvert.SerializeObject(Json_Array), Encoding.UTF8);
+                ResultText.Add(string.Format("Запрос выполнен успешно. Статус {0}\n", response.StatusCode));
+                ResultText.Add(string.Format("Тип: {0}\n", Json_Array.type));
+                ResultText.Add(string.Format("Тип токена: {0}\n", Json_Array.token_type));
+                ResultText.Add(string.Format("Токен доступа: {0}\n", Json_Array.access_token));
             }
             else
             {

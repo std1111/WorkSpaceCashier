@@ -15,5 +15,8 @@ namespace WorkSpaceCashier
         public static string URI_ShiftGetInfo = "/api/v1/shifts/";
         public static string Separator = "-----------------------------------------------------\n";
 
+       
+
+
     }
 }

@@ -40,11 +40,11 @@
             this.BtnCloseShift = new System.Windows.Forms.Button();
             this.BtnInfoShift = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.fileSystemWatcherNewChecks = new System.IO.FileSystemWatcher();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcherNewChecks)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSigninCashier
@@ -72,7 +72,7 @@
             // btnSell
             // 
             this.btnSell.BackColor = System.Drawing.SystemColors.Info;
-            this.btnSell.Location = new System.Drawing.Point(335, 6);
+            this.btnSell.Location = new System.Drawing.Point(299, 6);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(259, 92);
             this.btnSell.TabIndex = 2;
@@ -83,9 +83,10 @@
             // 
             this.richTextBoxCommandOutput.Location = new System.Drawing.Point(6, 195);
             this.richTextBoxCommandOutput.Name = "richTextBoxCommandOutput";
-            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(656, 204);
+            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(552, 204);
             this.richTextBoxCommandOutput.TabIndex = 3;
             this.richTextBoxCommandOutput.Text = "";
+            // 
             // btnPathWorkFolder
             // 
             this.btnPathWorkFolder.Location = new System.Drawing.Point(473, 14);
@@ -119,7 +120,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(676, 434);
+            this.tabControl1.Size = new System.Drawing.Size(576, 434);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
@@ -134,7 +135,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(668, 405);
+            this.tabPage1.Size = new System.Drawing.Size(568, 405);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Рабочее место";
             // 
@@ -169,21 +170,23 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(668, 405);
+            this.tabPage2.Size = new System.Drawing.Size(568, 405);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки";
             // 
-            // fileSystemWatcher1
+            // fileSystemWatcherNewChecks
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcherNewChecks.EnableRaisingEvents = true;
+            this.fileSystemWatcherNewChecks.Filter = "*.json";
+            this.fileSystemWatcherNewChecks.SynchronizingObject = this;
+            this.fileSystemWatcherNewChecks.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcherNewChecks_Created);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(700, 450);
+            this.ClientSize = new System.Drawing.Size(602, 450);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "Рабочее место РРО";
@@ -193,7 +196,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcherNewChecks)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -213,6 +216,7 @@
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Button BtnCloseShift;
         private System.Windows.Forms.Button BtnInfoShift;
+        private System.IO.FileSystemWatcher fileSystemWatcherNewChecks;
     }
 }
 
