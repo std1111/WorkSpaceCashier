@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace WorkSpaceCashier
 {
@@ -153,8 +154,27 @@ namespace WorkSpaceCashier
         private void fileSystemWatcherNewChecks_Created(object sender, FileSystemEventArgs e)
         {
             string value = $"Created: {e.FullPath}";
-            MessageBox.Show(value);
-            string message = "Зарегистрировать чек в системе Checkbox?";
+            //MessageBox.Show(value);
+            System.Threading.Thread.Sleep(2000);
+            var fileCheck = File.ReadAllText(e.FullPath, System.Text.Encoding.Default);
+
+            dynamic jsonCheck = JsonConvert.DeserializeObject<dynamic>(fileCheck);
+            string strGoods = String.Format("Кассир: {0}\n", jsonCheck.cashier_name);
+            foreach (dynamic payment in jsonCheck.payments)
+            {
+               float sumCheck = payment.value/100;
+                strGoods += String.Format("Оплата: {0}: {1}  грн.\t\n", payment.type, String.Format("{0,12:0.00}", sumCheck));
+            }
+            strGoods += "---------------------\n";
+            foreach (dynamic elem in jsonCheck.goods)
+            {
+                float quantity = elem.quantity / 1000;
+                float price = elem.good.price / 100;
+                strGoods += String.Format("{0} * {1} \t {2} \n",quantity.ToString(), String.Format("{0,12:0.00}", price), elem.good.name);
+            }
+
+
+            string message = "Зарегистрировать чек в системе Checkbox?\n" + strGoods;
             string caption = "Получен чек для регистрации";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
