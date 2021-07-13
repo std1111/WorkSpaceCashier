@@ -41,6 +41,7 @@
             this.BtnInfoShift = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.fileSystemWatcherNewChecks = new System.IO.FileSystemWatcher();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -78,6 +79,7 @@
             this.btnSell.TabIndex = 2;
             this.btnSell.Text = "Створення чеку продажу, його фіскалізація та доставка клієнту по email";
             this.btnSell.UseVisualStyleBackColor = false;
+            this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
             // 
             // richTextBoxCommandOutput
             // 
@@ -181,6 +183,11 @@
             this.fileSystemWatcherNewChecks.SynchronizingObject = this;
             this.fileSystemWatcherNewChecks.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcherNewChecks_Created);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -217,6 +224,7 @@
         private System.Windows.Forms.Button BtnCloseShift;
         private System.Windows.Forms.Button BtnInfoShift;
         private System.IO.FileSystemWatcher fileSystemWatcherNewChecks;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
