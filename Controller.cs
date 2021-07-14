@@ -185,31 +185,16 @@ namespace WorkSpaceCashier
 
         public async Task Get_PrintForm_CheckBoxAPI(string idReceipt)
         {
-            //var client = GetHttpClient(true, true);
-            //var shiftString = File.ReadAllText(Path.Combine(WorkingFolder, "shift.json"));
-            //dynamic shiftJson = JsonConvert.DeserializeObject<dynamic>(shiftString);
-
-            //HttpResponseMessage response = await client.GetAsync(ListStaticVar.URI_ShiftGetInfo + shiftJson.id);
-            //var result = await response.Content.ReadAsStringAsync();
-            //string result_json = JsonConvert.SerializeObject(result);
-            //dynamic Json_Array = JsonConvert.DeserializeObject<dynamic>(result);
-            //ResultText = new List<string>();
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    ResultText.Add("Інфо по зміні\n");
-            //    ResultText.Add(String.Format("ID зміни: {0}\n", Json_Array.id));
-            //    ResultText.Add(String.Format("Статус зміни: {0}\n", Json_Array.status));
-            //    ResultText.Add(String.Format("Відкрита: {0}\n", Json_Array.opened_at));
-            //    ResultText.Add(String.Format("Закрита: {0}\n", Json_Array.closed_at));
-
-            //    string path = Path.Combine(WorkingFolder, "info_shift.json");
-            //    File.WriteAllText(path, result);
-            //}
-            //else
-            //{
-            //    ResultText.Add(String.Format("{0}\n", "Помилка отримання інформації по зміні!"));
-
-            //}
+            var client = GetHttpClient(true, true);
+            string urlReceipt = ListStaticVar.URI_Receipts + "\\" + idReceipt + "\\text";
+            HttpResponseMessage response = await client.GetAsync(urlReceipt);
+            Stream inputStream = await response.Content.ReadAsStreamAsync();
+            string pathToTextFile = Path.Combine(MainForm.pathFolderPrintChecks, idReceipt + ".txt");
+            using (FileStream outputFileStream = new FileStream(pathToTextFile, FileMode.Create))
+            {
+                inputStream.CopyTo(outputFileStream);
+            }
+            System.Diagnostics.Process.Start(@pathToTextFile);
         }
 
 
@@ -235,34 +220,20 @@ namespace WorkSpaceCashier
                         File.Copy(path, Path.Combine(MainForm.pathFolderSendChecks, Path.GetFileName(path)));
                         File.Delete(path);
                     }
-
                     // Catch exception if the file was already copied.
                     catch (IOException copyError)
                     {
                         Console.WriteLine(copyError.Message);
                     }
-
-
-                    Console.WriteLine(Json_Array);
-
-                    //ResultText.Add("Виконано запит на відкриття зміни\n");
-                    //ResultText.Add(String.Format("Статус: {0}\n", Json_Array.status));
-                    //ResultText.Add(String.Format("Зміна ID : {0}\n", Json_Array.id));
-                    //string path = Path.Combine(WorkingFolder, "shift.json");
-                    //using (StreamWriter file = File.CreateText(path))
-                    //using (JsonTextWriter writer = new JsonTextWriter(file))
-                    //{
-                    //    Json_Array.WriteTo(writer);
-                    //}
-
-
-                    File.WriteAllText(path, result);
-				}
+                    
+                    await Get_PrintForm_CheckBoxAPI(idSell);
+                }
 
                 else
                 {
-              
-                    Console.WriteLine(Json_Array);
+                    ResultText.Add("Ошибка при регистрации чека\n");
+                    string message = Json_Array.message;
+                    ResultText.Add(message);
                 }
 			}
         }

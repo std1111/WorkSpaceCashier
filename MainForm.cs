@@ -152,12 +152,10 @@ namespace WorkSpaceCashier
             iniManager.WritePrivateString("main", "PathToWorkFolder", tbPathToWorkFolder.Text);
         }
 
-        private void fileSystemWatcherNewChecks_Created(object sender, FileSystemEventArgs e)
+        private async void GetNewCheck(string pathToFile)
         {
-            string path = $"Created: {e.FullPath}";
-            //MessageBox.Show(value);
-            System.Threading.Thread.Sleep(2000);
-            string strInfo = Controller.GetInfoFromJsonCheckFile(e.FullPath);
+            
+            string strInfo = Controller.GetInfoFromJsonCheckFile(pathToFile);
 
             string message = "Зарегистрировать чек в системе Checkbox?\n" + strInfo;
             string caption = "Получен чек для регистрации";
@@ -168,10 +166,20 @@ namespace WorkSpaceCashier
             {
                 // Closes the parent form.
                 MessageBox.Show("Регистрируем чек!");
+                Controller controller = new Controller();
+                controller.WorkingFolder = tbPathToWorkFolder.Text;
+                await controller.Post_Sell__CheckBoxAPI(pathToFile);
+                AddResultText(richTextBoxCommandOutput, controller.ResultText);
+
             }
+        }
 
 
 
+        private async void fileSystemWatcherNewChecks_Created(object sender, FileSystemEventArgs e)
+        {
+            System.Threading.Thread.Sleep(2000);
+            GetNewCheck(e.FullPath);
         }
 
         private async void btnSell_Click(object sender, EventArgs e)
@@ -182,9 +190,8 @@ namespace WorkSpaceCashier
                 return;
             // получаем выбранный файл
             string filename = openFileDialog1.FileName;
-            Controller controller = new Controller();
-            controller.WorkingFolder = tbPathToWorkFolder.Text;
-            await controller.Post_Sell__CheckBoxAPI(filename);
+            GetNewCheck(filename);
+
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)

@@ -14,6 +14,7 @@ namespace WorkSpaceCashier
         public static string URI_ShiftClose = "/api/v1/shifts/close";
         public static string URI_ShiftGetInfo = "/api/v1/shifts/";
         public static string URI_Sell = "/api/v1/receipts/sell";
+        public static string URI_Receipts = "/api/v1/receipts";
         public static string Separator = "-----------------------------------------------------\n";
 
        
