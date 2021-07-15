@@ -21,7 +21,18 @@ namespace WorkSpaceCashier
         private HttpClient GetHttpClient(bool addAuthHeader,bool addLicenseHeader)
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(ListStaticVar.URI_BaseAddress);
+            string uriBaseAddress = "";
+            if (MainForm.testMode)
+            {
+                uriBaseAddress = ListStaticVar.URI_TestBaseAddress;
+            }
+            else
+            {
+                uriBaseAddress = ListStaticVar.URI_BaseAddress;
+            }
+
+
+            client.BaseAddress = new Uri(uriBaseAddress);
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             if (addAuthHeader)
@@ -232,7 +243,7 @@ namespace WorkSpaceCashier
                 else
                 {
                     ResultText.Add("Ошибка при регистрации чека\n");
-                    string message = Json_Array.message;
+                    string message = (string) Json_Array.message;
                     ResultText.Add(message);
                 }
 			}

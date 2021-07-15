@@ -19,6 +19,7 @@ namespace WorkSpaceCashier
         private static readonly string pathToIniFile = Application.StartupPath + "\\INI\\Settings.ini";
         private INIManager iniManager;
         public static string workingFolder;
+        public static bool testMode;
         public static string pathFolderNewChecks;
         public static string pathFolderSendChecks;
         public static string pathFolderPrintChecks;
@@ -28,7 +29,10 @@ namespace WorkSpaceCashier
             InitializeComponent();
             iniManager = new INIManager(pathToIniFile);
             workingFolder = iniManager.GetPrivateString("main", "PathToWorkFolder");
-            tbPathToWorkFolder.Text = workingFolder;
+            tbPathToWorkFolder.Text = workingFolder;     
+            checkBoxTestServer.Checked = System.Convert.ToBoolean(iniManager.GetPrivateString("main", "TestModerSever"));
+            testMode = checkBoxTestServer.Checked;
+
             SetPaths();
         }
 
@@ -197,6 +201,14 @@ namespace WorkSpaceCashier
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void checkBoxTestServer_CheckedChanged(object sender, EventArgs e)
+        {
+            iniManager = new INIManager(pathToIniFile);
+            string testModeStr = System.Convert.ToString(checkBoxTestServer.Checked);
+            testMode = checkBoxTestServer.Checked;
+            iniManager.WritePrivateString("main", "TestModerSever", testModeStr);
         }
     }
 }
