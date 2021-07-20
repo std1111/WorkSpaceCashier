@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace WorkSpaceCashier
 {
@@ -92,7 +93,14 @@ namespace WorkSpaceCashier
             ResultText = new List<string>(); 
             if (response.IsSuccessStatusCode)
             {
-               // File.WriteAllText(Path.Combine(WorkingFolder, "cashier_response.json"), JsonConvert.SerializeObject(Json_Array), Encoding.UTF8);
+                string pathToAuth = Path.Combine(WorkingFolder, "auth.json");
+                var jsonAuth = File.ReadAllText(pathToAuth);
+                Auth auth = JsonConvert.DeserializeObject<Auth>(jsonAuth);
+                auth.access_token = Json_Array.access_token;
+                File.WriteAllText(pathToAuth, JsonConvert.SerializeObject(auth));
+
+
+                // File.WriteAllText(Path.Combine(WorkingFolder, "cashier_response.json"), JsonConvert.SerializeObject(Json_Array), Encoding.UTF8);
                 ResultText.Add(string.Format("Запрос выполнен успешно. Статус {0}\n", response.StatusCode));
                 ResultText.Add(string.Format("Тип: {0}\n", Json_Array.type));
                 ResultText.Add(string.Format("Тип токена: {0}\n", Json_Array.token_type));
@@ -101,6 +109,7 @@ namespace WorkSpaceCashier
             else
             {
                 resultText.Add(String.Format("Ошибка при выполнении запроса. Статус {0}", response.StatusCode));
+                //resultText.Add(String.Format("Ошибка при выполнении запроса. Статус {0}", response.StatusCode));
             }
 
         }
@@ -194,18 +203,42 @@ namespace WorkSpaceCashier
             }
         }
 
-        public async Task Get_PrintForm_CheckBoxAPI(string idReceipt)
+        public async Task Get_PrintForm_CheckBoxAPI(string idReceipt, List<string> resultTxt)
         {
             var client = GetHttpClient(true, true);
             string urlReceipt = ListStaticVar.URI_Receipts + "\\" + idReceipt + "\\text";
-            HttpResponseMessage response = await client.GetAsync(urlReceipt);
-            Stream inputStream = await response.Content.ReadAsStreamAsync();
-            string pathToTextFile = Path.Combine(MainForm.pathFolderPrintChecks, idReceipt + ".txt");
-            using (FileStream outputFileStream = new FileStream(pathToTextFile, FileMode.Create))
+
+            bool contnue = true;
+            int limitSec = 30000;
+            int stepSec  = 5000;
+            int currSec  = 0;  
+            while (contnue)
             {
-                inputStream.CopyTo(outputFileStream);
+                HttpResponseMessage response = await client.GetAsync(urlReceipt);
+                if (response.IsSuccessStatusCode)
+                {
+                    Stream inputStream = await response.Content.ReadAsStreamAsync();
+                    string pathToTextFile = Path.Combine(MainForm.pathFolderPrintChecks, idReceipt + ".txt");
+                    using (FileStream outputFileStream = new FileStream(pathToTextFile, FileMode.Create))
+                    {
+                        inputStream.CopyTo(outputFileStream);
+                    }
+                    System.Diagnostics.Process.Start(@pathToTextFile);
+                    contnue = false;
+                    resultTxt.Add(String.Format("Id чека {0} \n ", idReceipt));
+                    resultTxt.Add("Печатная форма чека  успешно получена и сохранена\n");
+                    resultTxt.Add(String.Format("{0}\n", pathToTextFile));
+                }
+                else
+                {
+                    currSec += stepSec;
+                    if (currSec > limitSec)
+                    {
+                        contnue = false;
+                    } 
+
+                }
             }
-            System.Diagnostics.Process.Start(@pathToTextFile);
         }
 
 
@@ -236,8 +269,8 @@ namespace WorkSpaceCashier
                     {
                         Console.WriteLine(copyError.Message);
                     }
-                    
-                    await Get_PrintForm_CheckBoxAPI(idSell);
+                    Thread.Sleep(5000);
+                    await Get_PrintForm_CheckBoxAPI(idSell, ResultText);
                 }
 
                 else

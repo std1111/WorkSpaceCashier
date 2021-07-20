@@ -37,16 +37,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBoxAutoRegChecks = new System.Windows.Forms.CheckBox();
+            this.checkBoxTestServer = new System.Windows.Forms.CheckBox();
             this.BtnCloseShift = new System.Windows.Forms.Button();
             this.BtnInfoShift = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.fileSystemWatcherNewChecks = new System.IO.FileSystemWatcher();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.checkBoxTestServer = new System.Windows.Forms.CheckBox();
+            this.fileSystemWatcherServiceDIR = new System.IO.FileSystemWatcher();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcherNewChecks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcherServiceDIR)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSigninCashier
@@ -74,7 +77,7 @@
             // btnSell
             // 
             this.btnSell.BackColor = System.Drawing.SystemColors.Info;
-            this.btnSell.Location = new System.Drawing.Point(285, 49);
+            this.btnSell.Location = new System.Drawing.Point(285, 80);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(259, 92);
             this.btnSell.TabIndex = 2;
@@ -129,6 +132,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tabPage1.Controls.Add(this.checkBoxAutoRegChecks);
             this.tabPage1.Controls.Add(this.checkBoxTestServer);
             this.tabPage1.Controls.Add(this.BtnCloseShift);
             this.tabPage1.Controls.Add(this.BtnInfoShift);
@@ -142,6 +146,29 @@
             this.tabPage1.Size = new System.Drawing.Size(568, 405);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Рабочее место";
+            // 
+            // checkBoxAutoRegChecks
+            // 
+            this.checkBoxAutoRegChecks.AutoSize = true;
+            this.checkBoxAutoRegChecks.Location = new System.Drawing.Point(285, 49);
+            this.checkBoxAutoRegChecks.Name = "checkBoxAutoRegChecks";
+            this.checkBoxAutoRegChecks.Size = new System.Drawing.Size(232, 21);
+            this.checkBoxAutoRegChecks.TabIndex = 7;
+            this.checkBoxAutoRegChecks.Text = "Режим авторегистрации чеков";
+            this.checkBoxAutoRegChecks.UseVisualStyleBackColor = true;
+            this.checkBoxAutoRegChecks.CheckedChanged += new System.EventHandler(this.checkBoxAutoRegChecks_CheckedChanged);
+            // 
+            // checkBoxTestServer
+            // 
+            this.checkBoxTestServer.AutoSize = true;
+            this.checkBoxTestServer.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.checkBoxTestServer.Location = new System.Drawing.Point(285, 7);
+            this.checkBoxTestServer.Name = "checkBoxTestServer";
+            this.checkBoxTestServer.Size = new System.Drawing.Size(142, 21);
+            this.checkBoxTestServer.TabIndex = 6;
+            this.checkBoxTestServer.Text = "Тестовий сервер";
+            this.checkBoxTestServer.UseVisualStyleBackColor = true;
+            this.checkBoxTestServer.CheckedChanged += new System.EventHandler(this.checkBoxTestServer_CheckedChanged);
             // 
             // BtnCloseShift
             // 
@@ -190,17 +217,11 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // checkBoxTestServer
+            // fileSystemWatcherServiceDIR
             // 
-            this.checkBoxTestServer.AutoSize = true;
-            this.checkBoxTestServer.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.checkBoxTestServer.Location = new System.Drawing.Point(285, 7);
-            this.checkBoxTestServer.Name = "checkBoxTestServer";
-            this.checkBoxTestServer.Size = new System.Drawing.Size(142, 21);
-            this.checkBoxTestServer.TabIndex = 6;
-            this.checkBoxTestServer.Text = "Тестовий сервер";
-            this.checkBoxTestServer.UseVisualStyleBackColor = true;
-            this.checkBoxTestServer.CheckedChanged += new System.EventHandler(this.checkBoxTestServer_CheckedChanged);
+            this.fileSystemWatcherServiceDIR.EnableRaisingEvents = true;
+            this.fileSystemWatcherServiceDIR.SynchronizingObject = this;
+            this.fileSystemWatcherServiceDIR.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcherServiceDIR_Created);
             // 
             // MainForm
             // 
@@ -219,6 +240,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcherNewChecks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcherServiceDIR)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -241,6 +263,8 @@
         private System.IO.FileSystemWatcher fileSystemWatcherNewChecks;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox checkBoxTestServer;
+        private System.Windows.Forms.CheckBox checkBoxAutoRegChecks;
+        private System.IO.FileSystemWatcher fileSystemWatcherServiceDIR;
     }
 }
 

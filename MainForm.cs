@@ -20,18 +20,22 @@ namespace WorkSpaceCashier
         private INIManager iniManager;
         public static string workingFolder;
         public static bool testMode;
+        public static bool autoRegMode;
         public static string pathFolderNewChecks;
         public static string pathFolderSendChecks;
         public static string pathFolderPrintChecks;
+        public static string pathFolderServiceDir;
 
         public MainForm()
         {
             InitializeComponent();
             iniManager = new INIManager(pathToIniFile);
             workingFolder = iniManager.GetPrivateString("main", "PathToWorkFolder");
-            tbPathToWorkFolder.Text = workingFolder;     
-            checkBoxTestServer.Checked = System.Convert.ToBoolean(iniManager.GetPrivateString("main", "TestModerSever"));
-            testMode = checkBoxTestServer.Checked;
+            tbPathToWorkFolder.Text = workingFolder;
+            testMode = iniManager.GetPrivateString("main", "TestModerServer").ToLower().Equals("true");
+            checkBoxTestServer.Checked = testMode;
+            autoRegMode = iniManager.GetPrivateString("main", "AutoRegMode").ToLower().Equals("true");
+            checkBoxAutoRegChecks.Checked = autoRegMode;
 
             SetPaths();
         }
@@ -52,11 +56,19 @@ namespace WorkSpaceCashier
 
 
                 // Determine whether the directory exists.
-                    if (!Directory.Exists(workingFolder))
+                if (!Directory.Exists(workingFolder))
                 {
                     DirectoryInfo di = Directory.CreateDirectory(workingFolder);
                     richTextBoxCommandOutput.AppendText(String.Format("The directory {0} was created successfully at {1}. \n", workingFolder, Directory.GetCreationTime(workingFolder)));
                 }
+                pathFolderServiceDir = Path.Combine(workingFolder, "ServiceDIR");
+                if (!Directory.Exists(pathFolderServiceDir))
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(pathFolderServiceDir);
+                    richTextBoxCommandOutput.AppendText(String.Format("The service directory {0} was created successfully at {1}. \n", pathFolderServiceDir, Directory.GetCreationTime(pathFolderServiceDir)));
+                }
+                fileSystemWatcherServiceDIR.Path = pathFolderServiceDir;
+
                 string currFolder = DateTime.Now.ToString("yyyy-MM-dd");
                 pathFolderNewChecks = Path.Combine(workingFolder, "Checks", currFolder, "New");
                 pathFolderSendChecks = Path.Combine(workingFolder, "Checks", currFolder, "Send");
@@ -156,25 +168,41 @@ namespace WorkSpaceCashier
             iniManager.WritePrivateString("main", "PathToWorkFolder", tbPathToWorkFolder.Text);
         }
 
+
+        private async void RegistartionSell(string pathToFile, List<string> result)
+        {
+            Controller controller = new Controller();
+            controller.WorkingFolder = tbPathToWorkFolder.Text;
+            await controller.Post_Sell__CheckBoxAPI(pathToFile);
+            AddResultText(richTextBoxCommandOutput, controller.ResultText);
+            result =  controller.ResultText;
+        }
+
+
         private async void GetNewCheck(string pathToFile)
         {
-            
-            string strInfo = Controller.GetInfoFromJsonCheckFile(pathToFile);
-
-            string message = "Зарегистрировать чек в системе Checkbox?\n" + strInfo;
-            string caption = "Получен чек для регистрации";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result;
-            result = MessageBox.Show(message, caption, buttons);
-            if (result == System.Windows.Forms.DialogResult.Yes)
+            if (autoRegMode)
             {
-                // Closes the parent form.
-                MessageBox.Show("Регистрируем чек!");
-                Controller controller = new Controller();
-                controller.WorkingFolder = tbPathToWorkFolder.Text;
-                await controller.Post_Sell__CheckBoxAPI(pathToFile);
-                AddResultText(richTextBoxCommandOutput, controller.ResultText);
+                List<string> res= new List<string>();
+                RegistartionSell(pathToFile, res);
+                AddResultText(richTextBoxCommandOutput, res);
 
+            } else {
+                    string strInfo = Controller.GetInfoFromJsonCheckFile(pathToFile);
+
+                    string message = "Зарегистрировать чек в системе Checkbox?\n" + strInfo;
+                    string caption = "Получен чек для регистрации";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result;
+                    result = MessageBox.Show(message, caption, buttons);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        // Closes the parent form.
+                        MessageBox.Show("Регистрируем чек!");
+                        List<string> res = new List<string>();
+                        RegistartionSell(pathToFile, res);
+                        AddResultText(richTextBoxCommandOutput, res);
+                }
             }
         }
 
@@ -208,7 +236,19 @@ namespace WorkSpaceCashier
             iniManager = new INIManager(pathToIniFile);
             string testModeStr = System.Convert.ToString(checkBoxTestServer.Checked);
             testMode = checkBoxTestServer.Checked;
-            iniManager.WritePrivateString("main", "TestModerSever", testModeStr);
+            iniManager.WritePrivateString("main", "TestModerServer", testModeStr);
+        }
+
+        private void checkBoxAutoRegChecks_CheckedChanged(object sender, EventArgs e)
+        {
+            iniManager = new INIManager(pathToIniFile);
+            autoRegMode = checkBoxTestServer.Checked;
+            iniManager.WritePrivateString("main", "AutoRegMode", System.Convert.ToString(autoRegMode));
+        }
+
+        private void fileSystemWatcherServiceDIR_Created(object sender, FileSystemEventArgs e)
+        {
+            MessageBox.Show("Created", pathFolderServiceDir);
         }
     }
 }
