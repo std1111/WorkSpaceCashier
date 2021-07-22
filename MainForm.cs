@@ -114,6 +114,10 @@ namespace WorkSpaceCashier
                 rtBox.AppendText(str);
             }
             richTextBoxCommandOutput.AppendText("\n");
+
+            richTextBoxCommandOutput.SelectionStart = richTextBoxCommandOutput.TextLength;
+            richTextBoxCommandOutput.ScrollToCaret();
+
         }
 
         private async void BtnSigninCashier_Click(object sender, EventArgs e)
@@ -234,21 +238,34 @@ namespace WorkSpaceCashier
         private void checkBoxTestServer_CheckedChanged(object sender, EventArgs e)
         {
             iniManager = new INIManager(pathToIniFile);
-            string testModeStr = System.Convert.ToString(checkBoxTestServer.Checked);
             testMode = checkBoxTestServer.Checked;
-            iniManager.WritePrivateString("main", "TestModerServer", testModeStr);
+            iniManager.WritePrivateString("main", "TestModerServer", testMode.ToString().ToLower());
         }
 
         private void checkBoxAutoRegChecks_CheckedChanged(object sender, EventArgs e)
         {
             iniManager = new INIManager(pathToIniFile);
-            autoRegMode = checkBoxTestServer.Checked;
-            iniManager.WritePrivateString("main", "AutoRegMode", System.Convert.ToString(autoRegMode));
+            autoRegMode = checkBoxAutoRegChecks.Checked;
+            iniManager.WritePrivateString("main", "AutoRegMode", autoRegMode.ToString().ToLower());
         }
 
-        private void fileSystemWatcherServiceDIR_Created(object sender, FileSystemEventArgs e)
+        private async void fileSystemWatcherServiceDIR_Created(object sender, FileSystemEventArgs e)
         {
-            MessageBox.Show("Created", pathFolderServiceDir);
+            System.Threading.Thread.Sleep(2000);
+            List<string> res = new List<string>();
+            res.Add("Получен запрос на получение печатной формы чека");
+            AddResultText(richTextBoxCommandOutput, res);
+            res.Clear();
+            
+            if (e.Name.Equals("GetPrintFormCheck.json")) {
+                var getInfoText = File.ReadAllText(Path.Combine(e.FullPath));
+                GetInfo getInfo = JsonConvert.DeserializeObject<GetInfo>(getInfoText);
+                Controller controller = new Controller();
+                controller.WorkingFolder = tbPathToWorkFolder.Text;
+                
+                await controller.Get_PrintForm_CheckBoxAPI(getInfo.id, res);
+                AddResultText(richTextBoxCommandOutput, res);
+            }
         }
     }
 }

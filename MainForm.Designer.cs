@@ -107,6 +107,7 @@
             // 
             this.tbPathToWorkFolder.Location = new System.Drawing.Point(134, 16);
             this.tbPathToWorkFolder.Name = "tbPathToWorkFolder";
+            this.tbPathToWorkFolder.ReadOnly = true;
             this.tbPathToWorkFolder.Size = new System.Drawing.Size(333, 22);
             this.tbPathToWorkFolder.TabIndex = 5;
             // 
