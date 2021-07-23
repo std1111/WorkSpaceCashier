@@ -127,11 +127,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="7208672_application_fitness_exercise_sport_icon.ico" />
-    <Content Include="7627398.ico" />
     <Content Include="7627398_app_icon.ico" />
-    <Content Include="7627398_app_logo_shape_website_software_icon.ico" />
-    <Content Include="7857155_playstore_google_play_store_app_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
