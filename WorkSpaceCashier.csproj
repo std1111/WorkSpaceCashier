@@ -50,7 +50,7 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>7627398_app_icon.ico</ApplicationIcon>
+    <ApplicationIcon>3925411-cashbox-cashier-shop-icon_111535.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>WorkSpaceCashier.Program</StartupObject>
@@ -127,7 +127,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="3925411-cashbox-cashier-shop-icon_111535.ico" />
     <Content Include="7627398_app_icon.ico" />
+    <Content Include="Accounting.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
