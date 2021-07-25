@@ -18,7 +18,6 @@ namespace WorkSpaceCashier
         public static string URI_Receipts = "/api/v1/receipts";
         public static string Separator = "-----------------------------------------------------\n";
 
-       
 
 
     }

@@ -19,6 +19,12 @@ namespace WorkSpaceCashier
         public string WorkingFolder { get => workingFolder; set => workingFolder = value; }
         public List<string> ResultText { get => resultText; set => resultText = value; }
 
+        
+        
+
+
+
+
         private HttpClient GetHttpClient(bool addAuthHeader,bool addLicenseHeader)
         {
             var client = new HttpClient();

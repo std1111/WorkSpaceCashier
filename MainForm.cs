@@ -29,13 +29,28 @@ namespace WorkSpaceCashier
         public MainForm()
         {
             InitializeComponent();
-            iniManager = new INIManager(pathToIniFile);
-            workingFolder = iniManager.GetPrivateString("main", "PathToWorkFolder");
+
+
+
+            RegManager.GetPathToWorkingFolder();
+            RegManager.GetAutoRegSell();
+            workingFolder = RegManager.GetPathToWorkingFolder();
             tbPathToWorkFolder.Text = workingFolder;
-            testMode = iniManager.GetPrivateString("main", "TestModerServer").ToLower().Equals("true");
+
+            testMode = RegManager.GetTestMode();
             checkBoxTestServer.Checked = testMode;
-            autoRegMode = iniManager.GetPrivateString("main", "AutoRegMode").ToLower().Equals("true");
+
+
+            autoRegMode = RegManager.GetAutoRegSell();
             checkBoxAutoRegChecks.Checked = autoRegMode;
+
+            //// iniManager = new INIManager(pathToIniFile);
+            // workingFolder = iniManager.GetPrivateString("main", "PathToWorkFolder");
+            // tbPathToWorkFolder.Text = workingFolder;
+            // testMode = iniManager.GetPrivateString("main", "TestModerServer").ToLower().Equals("true");
+            // checkBoxTestServer.Checked = testMode;
+            // autoRegMode = iniManager.GetPrivateString("main", "AutoRegMode").ToLower().Equals("true");
+            // checkBoxAutoRegChecks.Checked = autoRegMode;
 
             SetPaths();
         }
@@ -135,6 +150,7 @@ namespace WorkSpaceCashier
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 tbPathToWorkFolder.Text = fbd.SelectedPath;
             workingFolder = fbd.SelectedPath;
+            RegManager.SetPathToWorkingFolder(workingFolder);
         }
 
 
@@ -164,12 +180,12 @@ namespace WorkSpaceCashier
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            tbPathToWorkFolder.Text = iniManager.GetPrivateString("main", "PathToWorkFolder");
+            //tbPathToWorkFolder.Text = iniManager.GetPrivateString("main", "PathToWorkFolder");
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {     
-            iniManager.WritePrivateString("main", "PathToWorkFolder", tbPathToWorkFolder.Text);
+        {
+            RegManager.SetPathToWorkingFolder(tbPathToWorkFolder.Text);
         }
 
 
@@ -237,16 +253,14 @@ namespace WorkSpaceCashier
 
         private void checkBoxTestServer_CheckedChanged(object sender, EventArgs e)
         {
-            iniManager = new INIManager(pathToIniFile);
             testMode = checkBoxTestServer.Checked;
-            iniManager.WritePrivateString("main", "TestModerServer", testMode.ToString().ToLower());
+            RegManager.SetTestMode(testMode);   
         }
 
         private void checkBoxAutoRegChecks_CheckedChanged(object sender, EventArgs e)
         {
-            iniManager = new INIManager(pathToIniFile);
             autoRegMode = checkBoxAutoRegChecks.Checked;
-            iniManager.WritePrivateString("main", "AutoRegMode", autoRegMode.ToString().ToLower());
+            RegManager.SetAutoRegSell(autoRegMode);
         }
 
         private async void fileSystemWatcherServiceDIR_Created(object sender, FileSystemEventArgs e)

@@ -50,7 +50,7 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>3925411-cashbox-cashier-shop-icon_111535.ico</ApplicationIcon>
+    <ApplicationIcon>accounting_calculator_calculation_calculate_office_icon_191148.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>WorkSpaceCashier.Program</StartupObject>
@@ -75,6 +75,7 @@
     <Compile Include="Auth.cs" />
     <Compile Include="Cashier.cs" />
     <Compile Include="CashierResponse.cs" />
+    <Compile Include="RegManager.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="GetInfo.cs" />
     <Compile Include="INIManager.cs" />
@@ -130,6 +131,7 @@
     <Content Include="3925411-cashbox-cashier-shop-icon_111535.ico" />
     <Content Include="7627398_app_icon.ico" />
     <Content Include="Accounting.ico" />
+    <Content Include="accounting_calculator_calculation_calculate_office_icon_191148.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
