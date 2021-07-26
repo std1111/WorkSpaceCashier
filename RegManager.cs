@@ -26,7 +26,6 @@ namespace WorkSpaceCashier
             if (path==null){
                 path = "";
                 Registry.SetValue(keyName, keyPathToWorkingFolder, path, RegistryValueKind.String);
-
             }
 
             return path;
@@ -70,9 +69,6 @@ namespace WorkSpaceCashier
         {
             Registry.SetValue(keyName, keyTestMode, Convert.ToInt32(testMode), RegistryValueKind.DWord);
         }
-
-
-
 
     }
 }

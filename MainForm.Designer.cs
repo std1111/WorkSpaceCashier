@@ -217,7 +217,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // fileSystemWatcherServiceDIR
             // 
@@ -261,7 +260,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Button BtnCloseShift;
         private System.Windows.Forms.Button BtnInfoShift;
         private System.IO.FileSystemWatcher fileSystemWatcherNewChecks;

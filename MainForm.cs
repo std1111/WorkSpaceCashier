@@ -16,43 +16,33 @@ namespace WorkSpaceCashier
 {
     public partial class MainForm : Form
     {
-        private static readonly string pathToIniFile = Application.StartupPath + "\\INI\\Settings.ini";
-        private INIManager iniManager;
-        public static string workingFolder;
-        public static bool testMode;
+        public static string workingFolder;   
         public static bool autoRegMode;
         public static string pathFolderNewChecks;
         public static string pathFolderSendChecks;
         public static string pathFolderPrintChecks;
         public static string pathFolderServiceDir;
 
+        public bool testMode;
+        private Controller controller;
+
+       
         public MainForm()
         {
             InitializeComponent();
 
-
-
-            RegManager.GetPathToWorkingFolder();
-            RegManager.GetAutoRegSell();
             workingFolder = RegManager.GetPathToWorkingFolder();
+            this.controller = new Controller(workingFolder);
             tbPathToWorkFolder.Text = workingFolder;
 
-            testMode = RegManager.GetTestMode();
-            checkBoxTestServer.Checked = testMode;
-
+            this.testMode = RegManager.GetTestMode();       
+            this.controller.TestMode = this.testMode;        
+            checkBoxTestServer.Checked = this.testMode;
 
             autoRegMode = RegManager.GetAutoRegSell();
             checkBoxAutoRegChecks.Checked = autoRegMode;
-
-            //// iniManager = new INIManager(pathToIniFile);
-            // workingFolder = iniManager.GetPrivateString("main", "PathToWorkFolder");
-            // tbPathToWorkFolder.Text = workingFolder;
-            // testMode = iniManager.GetPrivateString("main", "TestModerServer").ToLower().Equals("true");
-            // checkBoxTestServer.Checked = testMode;
-            // autoRegMode = iniManager.GetPrivateString("main", "AutoRegMode").ToLower().Equals("true");
-            // checkBoxAutoRegChecks.Checked = autoRegMode;
-
             SetPaths();
+
         }
 
         private void SetPaths()
@@ -136,10 +126,8 @@ namespace WorkSpaceCashier
         }
 
         private async void BtnSigninCashier_Click(object sender, EventArgs e)
-        {
-            Controller controller = new Controller();
-            controller.WorkingFolder = tbPathToWorkFolder.Text;
-            await controller.Post_SignIn_Cashier_CheckBoxAPI();
+        {          
+            await this.controller.Post_SignIn_Cashier_CheckBoxAPI();
             AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
@@ -156,25 +144,20 @@ namespace WorkSpaceCashier
 
         private async void BtnNewShift_Click(object sender, EventArgs e)
         {
-            Controller controller = new Controller();
-            controller.WorkingFolder = tbPathToWorkFolder.Text;
-            await controller.Post_OpenShift_CheckBoxAPI();
+            await this.controller.Post_OpenShift_CheckBoxAPI();
             AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
         private async void BtnInfoShift_Click(object sender, EventArgs e)
         {
-            Controller controller = new Controller();
-            controller.WorkingFolder = tbPathToWorkFolder.Text;
-            await controller.Get_InfoShift_CheckBoxAPI();
+
+            await this.controller.Get_InfoShift_CheckBoxAPI();
             AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
         private async void BtnCloseShift_Click(object sender, EventArgs e)
         {
-            Controller controller = new Controller();
-            controller.WorkingFolder = tbPathToWorkFolder.Text;
-            await controller.Post_CloseShift_CheckBoxAPI();
+            await this.controller.Post_CloseShift_CheckBoxAPI();
             AddResultText(richTextBoxCommandOutput, controller.ResultText);
         }
 
@@ -191,9 +174,7 @@ namespace WorkSpaceCashier
 
         private async void RegistartionSell(string pathToFile, List<string> result)
         {
-            Controller controller = new Controller();
-            controller.WorkingFolder = tbPathToWorkFolder.Text;
-            await controller.Post_Sell__CheckBoxAPI(pathToFile);
+            await this.controller.Post_Sell__CheckBoxAPI(pathToFile);
             AddResultText(richTextBoxCommandOutput, controller.ResultText);
             result =  controller.ResultText;
         }
@@ -246,15 +227,13 @@ namespace WorkSpaceCashier
 
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
 
-        }
 
         private void checkBoxTestServer_CheckedChanged(object sender, EventArgs e)
         {
             testMode = checkBoxTestServer.Checked;
-            RegManager.SetTestMode(testMode);   
+            RegManager.SetTestMode(testMode);
+            this.controller.TestMode = this.testMode;
         }
 
         private void checkBoxAutoRegChecks_CheckedChanged(object sender, EventArgs e)
@@ -273,11 +252,8 @@ namespace WorkSpaceCashier
             
             if (e.Name.Equals("GetPrintFormCheck.json")) {
                 var getInfoText = File.ReadAllText(Path.Combine(e.FullPath));
-                GetInfo getInfo = JsonConvert.DeserializeObject<GetInfo>(getInfoText);
-                Controller controller = new Controller();
-                controller.WorkingFolder = tbPathToWorkFolder.Text;
-                
-                await controller.Get_PrintForm_CheckBoxAPI(getInfo.id, res);
+                GetInfo getInfo = JsonConvert.DeserializeObject<GetInfo>(getInfoText);              
+                await this.controller.Get_PrintForm_CheckBoxAPI(getInfo.id, res);
                 AddResultText(richTextBoxCommandOutput, res);
             }
         }

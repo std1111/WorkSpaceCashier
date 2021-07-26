@@ -14,22 +14,28 @@ namespace WorkSpaceCashier
     class Controller
     {
         private string workingFolder;
+        private bool testMode;
         private List<string> resultText;
 
         public string WorkingFolder { get => workingFolder; set => workingFolder = value; }
         public List<string> ResultText { get => resultText; set => resultText = value; }
+        public bool TestMode { get => testMode; set => testMode = value; }
 
-        
-        
+        public Controller()
+        {
+            
+        }
 
-
-
+        public Controller(string pathToWorkingFolder)
+        {
+            this.WorkingFolder = pathToWorkingFolder;
+        }
 
         private HttpClient GetHttpClient(bool addAuthHeader,bool addLicenseHeader)
         {
             var client = new HttpClient();
             string uriBaseAddress = "";
-            if (MainForm.testMode)
+            if (this.TestMode)
             {
                 uriBaseAddress = ListStaticVar.URI_TestBaseAddress;
             }
