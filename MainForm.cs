@@ -30,7 +30,12 @@ namespace WorkSpaceCashier
         public MainForm()
         {
             InitializeComponent();
-
+            bool checkIsOtherRunningProcess = IsRunningOtherProcess();
+            if (checkIsOtherRunningProcess)
+            {
+                MessageBox.Show("Запущена другая копия программы. Программа будет закрыта!");
+                Environment.Exit(0);
+            }
             workingFolder = RegManager.GetPathToWorkingFolder();
             this.controller = new Controller(workingFolder);
             tbPathToWorkFolder.Text = workingFolder;
@@ -42,8 +47,24 @@ namespace WorkSpaceCashier
             autoRegMode = RegManager.GetAutoRegSell();
             checkBoxAutoRegChecks.Checked = autoRegMode;
             SetPaths();
+            controller.PathFolderPrintChecks = pathFolderPrintChecks;
+            controller.PathFolderSendChecks = pathFolderSendChecks;
 
         }
+
+        public bool IsRunningOtherProcess()
+        {
+            bool isOtherProcess = false;
+            Process currentProcess = Process.GetCurrentProcess();
+            Process[] localByName = Process.GetProcessesByName(currentProcess.ProcessName);
+            if (localByName.Length > 1)
+            {
+                isOtherProcess = true;
+            }
+            return isOtherProcess; 
+        }
+
+
 
         private void SetPaths()
         {

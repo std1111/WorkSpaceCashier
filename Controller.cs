@@ -14,12 +14,16 @@ namespace WorkSpaceCashier
     class Controller
     {
         private string workingFolder;
+        private string pathFolderPrintChecks; 
+        private string pathFolderSendChecks;
         private bool testMode;
         private List<string> resultText;
 
         public string WorkingFolder { get => workingFolder; set => workingFolder = value; }
         public List<string> ResultText { get => resultText; set => resultText = value; }
         public bool TestMode { get => testMode; set => testMode = value; }
+        public string PathFolderPrintChecks { get => pathFolderPrintChecks; set => pathFolderPrintChecks = value; }
+        public string PathFolderSendChecks { get => pathFolderSendChecks; set => pathFolderSendChecks = value; }
 
         public Controller()
         {
@@ -153,7 +157,7 @@ namespace WorkSpaceCashier
 				}
 				else 
 				{
-					ResultText.Add(String.Format("Зміна вже відкрита\n", Json_Array.message));
+					//ResultText.Add(String.Format("Зміна вже відкрита\n", Json_Array.message));
 					ResultText.Add(String.Format("{0}\n", Json_Array.message));
 				}
 			}
@@ -230,7 +234,7 @@ namespace WorkSpaceCashier
                 if (response.IsSuccessStatusCode)
                 {
                     Stream inputStream = await response.Content.ReadAsStreamAsync();
-                    string pathToTextFile = Path.Combine(MainForm.pathFolderPrintChecks, idReceipt + ".txt");
+                    string pathToTextFile = Path.Combine(PathFolderPrintChecks, idReceipt + ".txt");
                     using (FileStream outputFileStream = new FileStream(pathToTextFile, FileMode.Create))
                     {
                         inputStream.CopyTo(outputFileStream);
@@ -273,7 +277,7 @@ namespace WorkSpaceCashier
                     string idSell = Json_Array.id;
                     try
                     {
-                        File.Copy(path, Path.Combine(MainForm.pathFolderSendChecks, Path.GetFileName(path)));
+                        File.Copy(path, Path.Combine(PathFolderSendChecks, Path.GetFileName(path)));
                         File.Delete(path);
                     }
                     // Catch exception if the file was already copied.
