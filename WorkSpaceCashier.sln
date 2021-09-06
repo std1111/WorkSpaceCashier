@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkSpaceCashier", "WorkSpaceCashier.csproj", "{A71D9378-9068-4713-BFDA-EB22D62F6F23}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWSC", "..\SetupWSC\SetupWSC.vdproj", "{26F7788E-9F8B-43D1-92D9-18D7A4A2759C}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupClientRROCheckbox", "..\SetupWSC\SetupWSC.vdproj", "{26F7788E-9F8B-43D1-92D9-18D7A4A2759C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientForRRO_CheckBox", "..\ClientForRRO_CheckBox\ClientForRRO_CheckBox.csproj", "{577CE5C2-35A1-4C60-8D33-3C220EC9805D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{A71D9378-9068-4713-BFDA-EB22D62F6F23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26F7788E-9F8B-43D1-92D9-18D7A4A2759C}.Debug|Any CPU.ActiveCfg = Debug
 		{26F7788E-9F8B-43D1-92D9-18D7A4A2759C}.Release|Any CPU.ActiveCfg = Release
+		{577CE5C2-35A1-4C60-8D33-3C220EC9805D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577CE5C2-35A1-4C60-8D33-3C220EC9805D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577CE5C2-35A1-4C60-8D33-3C220EC9805D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577CE5C2-35A1-4C60-8D33-3C220EC9805D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

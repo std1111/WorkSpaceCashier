@@ -56,9 +56,10 @@
             // btnSigninCashier
             // 
             this.btnSigninCashier.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSigninCashier.Location = new System.Drawing.Point(6, 6);
+            this.btnSigninCashier.Location = new System.Drawing.Point(4, 5);
+            this.btnSigninCashier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSigninCashier.Name = "btnSigninCashier";
-            this.btnSigninCashier.Size = new System.Drawing.Size(259, 37);
+            this.btnSigninCashier.Size = new System.Drawing.Size(194, 30);
             this.btnSigninCashier.TabIndex = 0;
             this.btnSigninCashier.Text = "Вхід користувача(касира)";
             this.btnSigninCashier.UseVisualStyleBackColor = false;
@@ -66,9 +67,10 @@
             // 
             // btnNewShift
             // 
-            this.btnNewShift.Location = new System.Drawing.Point(6, 49);
+            this.btnNewShift.Location = new System.Drawing.Point(4, 40);
+            this.btnNewShift.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNewShift.Name = "btnNewShift";
-            this.btnNewShift.Size = new System.Drawing.Size(259, 37);
+            this.btnNewShift.Size = new System.Drawing.Size(194, 30);
             this.btnNewShift.TabIndex = 1;
             this.btnNewShift.Text = " Відкриття нової зміни користувачем (касиром)";
             this.btnNewShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
@@ -78,9 +80,10 @@
             // btnSell
             // 
             this.btnSell.BackColor = System.Drawing.SystemColors.Info;
-            this.btnSell.Location = new System.Drawing.Point(285, 80);
+            this.btnSell.Location = new System.Drawing.Point(214, 65);
+            this.btnSell.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSell.Name = "btnSell";
-            this.btnSell.Size = new System.Drawing.Size(259, 92);
+            this.btnSell.Size = new System.Drawing.Size(194, 75);
             this.btnSell.TabIndex = 2;
             this.btnSell.Text = "Створення чеку продажу, його фіскалізація та доставка клієнту по email";
             this.btnSell.UseVisualStyleBackColor = false;
@@ -88,17 +91,19 @@
             // 
             // richTextBoxCommandOutput
             // 
-            this.richTextBoxCommandOutput.Location = new System.Drawing.Point(6, 195);
+            this.richTextBoxCommandOutput.Location = new System.Drawing.Point(4, 158);
+            this.richTextBoxCommandOutput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.richTextBoxCommandOutput.Name = "richTextBoxCommandOutput";
-            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(552, 204);
+            this.richTextBoxCommandOutput.Size = new System.Drawing.Size(415, 166);
             this.richTextBoxCommandOutput.TabIndex = 3;
             this.richTextBoxCommandOutput.Text = "";
             // 
             // btnPathWorkFolder
             // 
-            this.btnPathWorkFolder.Location = new System.Drawing.Point(473, 14);
+            this.btnPathWorkFolder.Location = new System.Drawing.Point(355, 11);
+            this.btnPathWorkFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPathWorkFolder.Name = "btnPathWorkFolder";
-            this.btnPathWorkFolder.Size = new System.Drawing.Size(81, 27);
+            this.btnPathWorkFolder.Size = new System.Drawing.Size(61, 22);
             this.btnPathWorkFolder.TabIndex = 4;
             this.btnPathWorkFolder.Text = "Выбрать";
             this.btnPathWorkFolder.UseVisualStyleBackColor = true;
@@ -106,18 +111,20 @@
             // 
             // tbPathToWorkFolder
             // 
-            this.tbPathToWorkFolder.Location = new System.Drawing.Point(134, 16);
+            this.tbPathToWorkFolder.Location = new System.Drawing.Point(100, 13);
+            this.tbPathToWorkFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbPathToWorkFolder.Name = "tbPathToWorkFolder";
             this.tbPathToWorkFolder.ReadOnly = true;
-            this.tbPathToWorkFolder.Size = new System.Drawing.Size(333, 22);
+            this.tbPathToWorkFolder.Size = new System.Drawing.Size(251, 20);
             this.tbPathToWorkFolder.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 19);
+            this.label1.Location = new System.Drawing.Point(15, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 17);
+            this.label1.Size = new System.Drawing.Size(93, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "Рабочая папка";
             // 
@@ -125,10 +132,11 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(9, 10);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(576, 434);
+            this.tabControl1.Size = new System.Drawing.Size(432, 353);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
@@ -142,19 +150,21 @@
             this.tabPage1.Controls.Add(this.richTextBoxCommandOutput);
             this.tabPage1.Controls.Add(this.btnNewShift);
             this.tabPage1.Controls.Add(this.btnSell);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(568, 405);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Size = new System.Drawing.Size(424, 327);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Рабочее место";
             // 
             // checkBoxAutoRegChecks
             // 
             this.checkBoxAutoRegChecks.AutoSize = true;
-            this.checkBoxAutoRegChecks.Location = new System.Drawing.Point(285, 49);
+            this.checkBoxAutoRegChecks.Location = new System.Drawing.Point(214, 40);
+            this.checkBoxAutoRegChecks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxAutoRegChecks.Name = "checkBoxAutoRegChecks";
-            this.checkBoxAutoRegChecks.Size = new System.Drawing.Size(232, 21);
+            this.checkBoxAutoRegChecks.Size = new System.Drawing.Size(210, 19);
             this.checkBoxAutoRegChecks.TabIndex = 7;
             this.checkBoxAutoRegChecks.Text = "Режим авторегистрации чеков";
             this.checkBoxAutoRegChecks.UseVisualStyleBackColor = true;
@@ -164,9 +174,10 @@
             // 
             this.checkBoxTestServer.AutoSize = true;
             this.checkBoxTestServer.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.checkBoxTestServer.Location = new System.Drawing.Point(285, 7);
+            this.checkBoxTestServer.Location = new System.Drawing.Point(214, 6);
+            this.checkBoxTestServer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxTestServer.Name = "checkBoxTestServer";
-            this.checkBoxTestServer.Size = new System.Drawing.Size(142, 21);
+            this.checkBoxTestServer.Size = new System.Drawing.Size(128, 19);
             this.checkBoxTestServer.TabIndex = 6;
             this.checkBoxTestServer.Text = "Тестовий сервер";
             this.checkBoxTestServer.UseVisualStyleBackColor = true;
@@ -174,9 +185,10 @@
             // 
             // BtnCloseShift
             // 
-            this.BtnCloseShift.Location = new System.Drawing.Point(6, 135);
+            this.BtnCloseShift.Location = new System.Drawing.Point(4, 110);
+            this.BtnCloseShift.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnCloseShift.Name = "BtnCloseShift";
-            this.BtnCloseShift.Size = new System.Drawing.Size(259, 37);
+            this.BtnCloseShift.Size = new System.Drawing.Size(194, 30);
             this.BtnCloseShift.TabIndex = 5;
             this.BtnCloseShift.Text = "Закриття зміни";
             this.BtnCloseShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
@@ -185,9 +197,10 @@
             // 
             // BtnInfoShift
             // 
-            this.BtnInfoShift.Location = new System.Drawing.Point(6, 92);
+            this.BtnInfoShift.Location = new System.Drawing.Point(4, 75);
+            this.BtnInfoShift.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnInfoShift.Name = "BtnInfoShift";
-            this.BtnInfoShift.Size = new System.Drawing.Size(259, 37);
+            this.BtnInfoShift.Size = new System.Drawing.Size(194, 30);
             this.BtnInfoShift.TabIndex = 4;
             this.BtnInfoShift.Text = "Перевірка статусу зміни";
             this.BtnInfoShift.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
@@ -200,10 +213,11 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.tbPathToWorkFolder);
             this.tabPage2.Controls.Add(this.btnPathWorkFolder);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(568, 405);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(424, 327);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки";
             // 
@@ -226,12 +240,13 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(602, 450);
+            this.ClientSize = new System.Drawing.Size(452, 366);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Рабочее место РРО";
